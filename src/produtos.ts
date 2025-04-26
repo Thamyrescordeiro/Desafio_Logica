@@ -112,7 +112,6 @@ function menu() {
         console.log("6. Sair");
 
         opcao = readlineSync.questionInt("Escolha uma opção: ");
-        console.log(`Você escolheu: ${opcao}`);
 
         
         if(opcao < 0 || opcao > 6) {
@@ -138,12 +137,19 @@ function menu() {
 
     case 2:
       const idnomeEditar = readlineSync.questionInt('ID do produto a editar: ');
+      const produtoExistente = produtos.find(produto => produto.id === idnomeEditar);
+
+      if (!produtoExistente) {
+          console.log("Produto não encontrado.");
+          break;
+      }
+
       const novoNome = readlineSync.question('Nome do produto a editar: ');
       const novoPreco = readlineSync.questionFloat('Novo preço do produto: ');
       const novaCategoria = readlineSync.question('Nova categoria do produto: ');
-      const novaQuantidadeEstoque = readlineSync.questionInt('Nova quantidade do produto: ')
+      const novaQuantidadeEstoque = readlineSync.questionInt('Nova quantidade do produto: ');
       editarProdutoId(idnomeEditar, novoNome, novoPreco, novaCategoria, novaQuantidadeEstoque);
-       break;
+      break;
 
     case 3: 
     const idRemover = readlineSync.questionInt('ID do produto a remover: ');
